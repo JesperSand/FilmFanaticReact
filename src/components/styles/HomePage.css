@@ -1,0 +1,38 @@
+/* HomePage.css */
+
+/* CSS Reset to remove default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensure consistent box sizing */
+}
+
+body {
+    height: 100vh; /* Ensure the body takes full height */
+    display: flex; /* Use flexbox to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light background color */
+}
+
+.container {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Full height of the parent */
+}
+
+.card {
+    background-color: white; /* White background for the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    overflow: hidden; /* Prevent overflow */
+    max-width: 300px; /* Max width for the card */
+    text-align: center; /* Center the text (if any) */
+}
+
+.image {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
