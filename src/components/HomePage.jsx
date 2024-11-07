@@ -1,101 +1,176 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles/HomePage.css'; // Import the CSS file for styling
+import './styles/HomePage.css';
 
-const BASE_URL = "https://api.themoviedb.org/3"; // Base URL for the TMDB API
-const API_KEY = import.meta.env.VITE_TMDB_API_KEY; // Access the API key from the environment variables
+const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const HomePage = () => {
-  const [movies, setMovies] = useState([]); // State to hold the popular movies
-  const [currentMovieIndex, setCurrentMovieIndex] = useState(0); // State for the current movie index
-  const [loading, setLoading] = useState(true); // State for loading status
-  const [error, setError] = useState(null); // State to hold any errors
-  const [trendingMovies, setTrendingMovies] = useState([]); // State to hold trending movies
+  const [movies, setMovies] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/movie/popular`, {
-          params: {
-            api_key: API_KEY, // Pass the API key in the request
-            language: 'en-US',
-            page: 1,
-          },
+          params: { api_key: API_KEY, language: 'en-US', page: 1 },
         });
-        setMovies(response.data.results); // Set the state with the fetched movie data
-        setLoading(false); // Update loading state
+        setMovies(response.data.results);
+        setLoading(false);
       } catch (err) {
-        console.error(err); // Log any errors to the console
-        setError("Failed to load movies"); // Set error message
-        setLoading(false); // Update loading state
+        console.error(err);
+        setError("Failed to load movies");
+        setLoading(false);
       }
     };
 
     const fetchTrendingMovies = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/trending/movie/week`, {
-          params: {
-            api_key: API_KEY,
-            language: 'en-US',
-          },
+          params: { api_key: API_KEY, language: 'en-US' },
         });
-        setTrendingMovies(response.data.results); // Set the state with the fetched trending movies
+        setTrendingMovies(response.data.results);
       } catch (err) {
-        console.error(err); // Log any errors to the console
-        setError("Failed to load trending movies"); // Set error message
+        console.error(err);
+        setError("Failed to load trending movies");
       }
     };
 
-    fetchMovies(); // Call the fetch function for popular movies when the component mounts
-    fetchTrendingMovies(); // Call the fetch function for trending movies
-  }, []); // Empty dependency array means this runs once
+    const fetchPopularMovies = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/movie/popular`, {
+          params: { api_key: API_KEY, language: 'en-US', page: 2 },
+        });
+        setPopularMovies(response.data.results);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load popular movies");
+      }
+    };
+
+    const fetchTopRatedMovies = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/movie/top_rated`, {
+          params: { api_key: API_KEY, language: 'en-US', page: 1 },
+        });
+        setTopRatedMovies(response.data.results);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load top-rated movies");
+      }
+    };
+
+    const fetchUpcomingMovies = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/movie/upcoming`, {
+          params: { api_key: API_KEY, language: 'en-US', page: 1 },
+        });
+        setUpcomingMovies(response.data.results);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load upcoming movies");
+      }
+    };
+
+    fetchMovies();
+    fetchTrendingMovies();
+    fetchPopularMovies();
+    fetchTopRatedMovies();
+    fetchUpcomingMovies();
+  }, []);
 
   useEffect(() => {
     let intervalId;
-
-    // Function to randomize the current movie index
     const randomizeMovie = () => {
       if (movies.length > 0) {
-        // Generate a random index
         const randomIndex = Math.floor(Math.random() * movies.length);
-        setCurrentMovieIndex(randomIndex); // Set the new random movie index
+        setCurrentMovieIndex(randomIndex);
       }
     };
-
     if (movies.length > 0) {
-      randomizeMovie(); // Randomize movie initially
-      intervalId = setInterval(randomizeMovie, 10000); // Set interval to randomize every 10 seconds
+      randomizeMovie();
+      intervalId = setInterval(randomizeMovie, 10000);
     }
-
-    // Cleanup function to clear the interval
     return () => {
       if (intervalId) {
         clearInterval(intervalId);
       }
     };
-  }, [movies]); // Run this effect whenever movies are fetched
+  }, [movies]);
 
-  if (loading) return <p>Loading movies...</p>; // Render loading text while fetching
-  if (error) return <p>{error}</p>; // Render error message if there's an error
+  if (loading) return <p>Loading movies...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="container">
       <div className="card">
-        {movies.length > 0 && (
-          <img
-            src={`https://image.tmdb.org/t/p/w300${movies[currentMovieIndex].poster_path}`} // Display the current movie poster
-            alt={movies[currentMovieIndex].title}
-            className="image"
-          />
-        )}
+  {movies.length > 0 && (
+    <>
+      <img
+        src={`https://image.tmdb.org/t/p/w300${movies[currentMovieIndex].poster_path}`}
+        alt={movies[currentMovieIndex].title}
+        className="image"
+      />
+      <div className="overlay-buttons">
+        <button className="poster-button">Watch Trailer</button>
+        <button className="poster-button">Add to List</button>
       </div>
+    </>
+  )}
+</div>
+
 
       <h2 className="trending-heading">Trending Movies</h2>
       <div className="trending-container">
         {trendingMovies.map((movie) => (
           <div key={movie.id} className="trending-card">
             <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} // Display the trending movie poster
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              alt={movie.title}
+              className="trending-image"
+            />
+          </div>
+        ))}
+      </div>
+
+      <h2 className="trending-heading">Popular Movies</h2>
+      <div className="trending-container">
+        {popularMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              alt={movie.title}
+              className="trending-image"
+            />
+          </div>
+        ))}
+      </div>
+
+      <h2 className="trending-heading">Top Rated Movies</h2>
+      <div className="trending-container">
+        {topRatedMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              alt={movie.title}
+              className="trending-image"
+            />
+          </div>
+        ))}
+      </div>
+
+      <h2 className="trending-heading">Upcoming Movies</h2>
+      <div className="trending-container">
+        {upcomingMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
               alt={movie.title}
               className="trending-image"
             />
@@ -106,4 +181,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage; // Export the HomePage component for use in other parts of the app
+export default HomePage;
