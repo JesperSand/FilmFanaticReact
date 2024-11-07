@@ -4,7 +4,7 @@ import axios from 'axios';
 import './styles/DetailsPage.css'; // Import the CSS file
 
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const DetailsPage = () => {
   const { id } = useParams(); // Get the movie ID from the URL
@@ -33,30 +33,37 @@ const DetailsPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-<div className="details-background">
-  <div className="details-content">
-    <div className="poster-section">
-      <img
-        className="movie-poster"
-        src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-        alt={movieDetails.title}
-      />
-      <div className="overlay">  {/* The overlay container */}
-        <h1 className="movie-title">{movieDetails.title}</h1>
-        <p className="movie-description">{movieDetails.overview}</p>
+    <div
+      className="details-background"
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/w500${movieDetails.poster_path})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="details-content">
+        <div className="overlay">
+          {/* Flex container for the poster and title */}
+          <div className="poster-title-section">
+            <img
+              className="additional-poster"
+              src={`https://image.tmdb.org/t/p/w200${movieDetails.poster_path}`} // Use a smaller size for the poster
+              alt={movieDetails.title}
+            />
+            <h1 className="movie-title">{movieDetails.title}</h1>
+          </div>
 
-        {/* Additional information inside the overlay */}
-        <div className="movie-release-date">
-          <strong>Release Date: </strong>{movieDetails.release_date}
-        </div>
-        <div className="movie-rating">
-          <strong>Rating: </strong>{movieDetails.vote_average} / 10
+          {/* Additional information */}
+          <p className="movie-description">{movieDetails.overview}</p>
+          <div className="movie-release-date">
+            <strong>Release Date: </strong>{movieDetails.release_date}
+          </div>
+          <div className="movie-rating">
+            <strong>Rating: </strong>{movieDetails.vote_average} / 10
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
   );
 };
 

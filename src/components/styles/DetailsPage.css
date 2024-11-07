@@ -1,4 +1,4 @@
-.details-page {
+.details-background {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -18,9 +18,23 @@
     text-align: left;
   }
   
+  .poster-title-section {
+    display: flex; /* Flex container for poster and title */
+    align-items: center; /* Vertically center the items */
+    margin-bottom: 15px; /* Add some space between the title/poster and description */
+  }
+  
+  .additional-poster {
+    width: 120px; /* Adjust size of the additional poster */
+    height: auto;
+    margin-right: 20px; /* Space between the poster and title */
+    border-radius: 5px; /* Optional: rounding the corners of the poster */
+  }
+  
   .movie-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
+    flex-grow: 1; /* Title takes the remaining space */
   }
   
   .movie-description {
