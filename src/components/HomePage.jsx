@@ -6,10 +6,11 @@ const BASE_URL = "https://api.themoviedb.org/3"; // Base URL for the TMDB API
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY; // Access the API key from the environment variables
 
 const HomePage = () => {
-  const [movies, setMovies] = useState([]); // State to hold the movies
+  const [movies, setMovies] = useState([]); // State to hold the popular movies
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0); // State for the current movie index
   const [loading, setLoading] = useState(true); // State for loading status
   const [error, setError] = useState(null); // State to hold any errors
+  const [trendingMovies, setTrendingMovies] = useState([]); // State to hold trending movies
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -30,7 +31,23 @@ const HomePage = () => {
       }
     };
 
-    fetchMovies(); // Call the fetch function when the component mounts
+    const fetchTrendingMovies = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/trending/movie/week`, {
+          params: {
+            api_key: API_KEY,
+            language: 'en-US',
+          },
+        });
+        setTrendingMovies(response.data.results); // Set the state with the fetched trending movies
+      } catch (err) {
+        console.error(err); // Log any errors to the console
+        setError("Failed to load trending movies"); // Set error message
+      }
+    };
+
+    fetchMovies(); // Call the fetch function for popular movies when the component mounts
+    fetchTrendingMovies(); // Call the fetch function for trending movies
   }, []); // Empty dependency array means this runs once
 
   useEffect(() => {
@@ -71,6 +88,19 @@ const HomePage = () => {
             className="image"
           />
         )}
+      </div>
+
+      <h2 className="trending-heading">Trending Movies</h2>
+      <div className="trending-container">
+        {trendingMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} // Display the trending movie poster
+              alt={movie.title}
+              className="trending-image"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
