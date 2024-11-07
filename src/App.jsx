@@ -1,20 +1,19 @@
-// src/App.jsx
+// App.js or main routing file
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage'; // Adjust the import path as necessary
+import HomePage from './components/HomePage';
+import DetailsPage from './components/DetailsPage'; // Correct import
 
 const App = () => {
   return (
     <Router>
-      <div>
-        <Routes>
-          <Route path="/" element={<HomePage />} /> {/* Define the route for the HomePage */}
-          {/* You can add more routes here as needed */}
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movie/:id" element={<DetailsPage />} /> {/* Movie detail page */}
+      </Routes>
     </Router>
   );
 };
 
-export default App; // Export the App component
+export default App;

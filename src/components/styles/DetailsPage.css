@@ -1,0 +1,50 @@
+.details-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better readability */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    text-align: left;
+  }
+  
+  .movie-title {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .movie-description {
+    font-size: 1.2rem;
+    margin: 15px 0;
+  }
+  
+  .movie-release-date,
+  .movie-rating {
+    font-size: 1.1rem;
+    margin: 10px 0;
+  }
+  
+  .movie-release-date strong,
+  .movie-rating strong {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 600px) {
+    .movie-title {
+      font-size: 2rem;
+    }
+    .movie-description {
+      font-size: 1rem;
+    }
+  }
+  

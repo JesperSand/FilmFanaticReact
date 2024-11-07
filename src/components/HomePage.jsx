@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import axios from 'axios';
 import './styles/HomePage.css';
 
@@ -110,70 +111,83 @@ const HomePage = () => {
   return (
     <div className="container">
       <div className="card">
-  {movies.length > 0 && (
-    <>
-      <img
-        src={`https://image.tmdb.org/t/p/w300${movies[currentMovieIndex].poster_path}`}
-        alt={movies[currentMovieIndex].title}
-        className="image"
-      />
-      <div className="overlay-buttons">
-        <button className="poster-button">Watch Trailer</button>
-        <button className="poster-button">Add to List</button>
+        {movies.length > 0 && (
+          <>
+            <Link to={`/movie/${movies[currentMovieIndex].id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movies[currentMovieIndex].poster_path}`}
+                alt={movies[currentMovieIndex].title}
+                className="image"
+              />
+            </Link>
+            <div className="overlay-buttons">
+              <button className="poster-button">Watch Trailer</button>
+              <button className="poster-button">Add to List</button>
+            </div>
+          </>
+        )}
       </div>
-    </>
-  )}
-</div>
 
-
+      {/* Trending Movies Section */}
       <h2 className="trending-heading">Trending Movies</h2>
       <div className="trending-container">
         {trendingMovies.map((movie) => (
           <div key={movie.id} className="trending-card">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={movie.title}
-              className="trending-image"
-            />
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
           </div>
         ))}
       </div>
 
+      {/* Popular Movies Section */}
       <h2 className="trending-heading">Popular Movies</h2>
       <div className="trending-container">
         {popularMovies.map((movie) => (
           <div key={movie.id} className="trending-card">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={movie.title}
-              className="trending-image"
-            />
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
           </div>
         ))}
       </div>
 
+      {/* Top Rated Movies Section */}
       <h2 className="trending-heading">Top Rated Movies</h2>
       <div className="trending-container">
         {topRatedMovies.map((movie) => (
           <div key={movie.id} className="trending-card">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={movie.title}
-              className="trending-image"
-            />
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
           </div>
         ))}
       </div>
 
+      {/* Upcoming Movies Section */}
       <h2 className="trending-heading">Upcoming Movies</h2>
       <div className="trending-container">
         {upcomingMovies.map((movie) => (
           <div key={movie.id} className="trending-card">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              alt={movie.title}
-              className="trending-image"
-            />
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
           </div>
         ))}
       </div>
