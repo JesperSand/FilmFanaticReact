@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom'; // Import Link for routing
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './styles/DetailsPage.css';
 
@@ -12,7 +12,11 @@ const DetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cast, setCast] = useState([]);
-  const [similarMovies, setSimilarMovies] = useState([]); // State for similar movies
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(false); // Track if description is expanded
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 720); // Track if screen is wide
+
+  const MAX_DESCRIPTION_LENGTH = 150; // Maximum length for truncated description
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -30,7 +34,7 @@ const DetailsPage = () => {
         const similarMoviesResponse = await axios.get(`${BASE_URL}/movie/${id}/similar`, {
           params: { api_key: API_KEY, language: 'en-US' },
         });
-        setSimilarMovies(similarMoviesResponse.data.results); // Set similar movies data
+        setSimilarMovies(similarMoviesResponse.data.results);
 
         setLoading(false);
       } catch (error) {
@@ -42,6 +46,13 @@ const DetailsPage = () => {
     fetchMovieDetails();
   }, [id]);
 
+  // Monitor screen width changes
+  useEffect(() => {
+    const handleResize = () => setIsWideScreen(window.innerWidth > 720);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   if (loading) return <p>Loading movie details...</p>;
   if (error) return <p>{error}</p>;
 
@@ -51,6 +62,9 @@ const DetailsPage = () => {
   const hours = Math.floor(runtime / 60);
   const minutes = runtime % 60;
   const formattedRuntime = runtime ? `${hours}h ${minutes}m` : 'N/A';
+
+  // Function to toggle description between truncated and full
+  const toggleDescription = () => setIsExpanded(!isExpanded);
 
   return (
     <div
@@ -77,7 +91,18 @@ const DetailsPage = () => {
               <p className="movie-info">
                 {releaseYear} · {ageRating} · {formattedRuntime}
               </p>
-              <p className="movie-description">{movieDetails.overview}</p>
+              <p className="movie-description">
+                {/* Conditionally render the full or truncated description */}
+                {isExpanded || movieDetails.overview.length <= MAX_DESCRIPTION_LENGTH
+                  ? movieDetails.overview
+                  : `${movieDetails.overview.slice(0, MAX_DESCRIPTION_LENGTH)}... `}
+                {/* Show "Read More" or "Show Less" button based on isExpanded */}
+                {movieDetails.overview.length > MAX_DESCRIPTION_LENGTH && (
+                  <button onClick={toggleDescription} className="read-more-button">
+                    {isExpanded ? 'Show Less' : 'Read More'}
+                  </button>
+                )}
+              </p>
             </div>
           </div>
 
@@ -111,14 +136,14 @@ const DetailsPage = () => {
           <div className="similar-movies-section">
             <h2>Similar Movies</h2>
             <div className="similar-movies-list">
-              {similarMovies.slice(0, 4).map((movie) => (
+              {/* Adjust the number of similar movies shown based on screen size */}
+              {similarMovies.slice(0, isWideScreen ? 5 : 4).map((movie) => (
                 <Link to={`/movie/${movie.id}`} key={movie.id} className="similar-movie">
                   <img
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                     alt={movie.title}
                     className="similar-movie-poster"
                   />
-                  <p className="similar-movie-title">{movie.title}</p>
                 </Link>
               ))}
             </div>
