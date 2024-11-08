@@ -1,0 +1,52 @@
+/* Full Cast Page Layout */
+.full-cast-page {
+    background-color: #222;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .full-cast-page .full-cast-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center; /* Ensure the items are centered */
+    width: 100%; /* Ensure the grid takes the full width */
+  }
+  
+  .full-cast-page .cast-member {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+  }
+  
+  .full-cast-page .cast-member-photo {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .full-cast-page .cast-member-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 600px) {
+    .full-cast-page .full-cast-list {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller columns for mobile */
+    }
+  
+    .full-cast-page .cast-member-photo {
+      width: 120px;
+      height: 160px;
+    }
+  }
+  

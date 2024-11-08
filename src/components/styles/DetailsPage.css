@@ -34,7 +34,7 @@
   }
   
   .additional-poster {
-    width: 120px;
+    width: 180px;
     height: auto;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -75,31 +75,33 @@
     align-items: flex-start;
   }
   
+  .cast-header {
+    display: flex;
+    justify-content: space-between; /* This will space out the title and the button */
+    align-items: center;
+    width: 100%; /* Ensures the title and button are spaced across the full width */
+  }
+  
   .cast-section h2 {
     font-size: 24px;
     font-weight: bold;
   }
   
-  /* Styling for both Read More and Show All buttons */
-  .read-more-button,
   .show-all-button {
     color: white;
     background: none;
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
-    padding: 0;
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
-  .read-more-button:hover,
   .show-all-button:hover {
     text-decoration: underline;
     color: #ddd;
   }
   
-  .read-more-button:focus,
   .show-all-button:focus {
     outline: none;
   }
@@ -139,27 +141,6 @@
     align-self: center;
     gap: 50px;
     margin-top: 20px;
-  }
-  
-  /* Styling for the red buttons */
-  .red-button {
-    color: white;
-    background-color: red; /* Red background */
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .red-button:hover {
-    background-color: darkred; /* Darker red on hover */
-  }
-  
-  .red-button:focus {
-    outline: none;
   }
   
   .similar-movies-section {
@@ -202,6 +183,45 @@
     margin-top: 5px;
   }
   
+  /* Red Buttons Styling */
+  .red-button {
+    color: white;
+    background-color: red;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .red-button:hover {
+    background-color: darkred;
+  }
+  
+  .read-more-button,
+  .show-all-button {
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .read-more-button:hover,
+  .show-all-button:hover {
+    text-decoration: underline;
+    color: #ddd;
+  }
+  
+  .read-more-button:focus,
+  .show-all-button:focus {
+    outline: none;
+  }
+  
+  /* Mobile responsiveness */
   @media (max-width: 600px) {
     .movie-title {
       font-size: 2rem;
