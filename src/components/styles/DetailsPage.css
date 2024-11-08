@@ -1,46 +1,59 @@
+/* Background and layout */
 .details-background {
     width: 100%;
-    height: 100vh; /* Full height of the viewport */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     color: white;
     padding: 20px;
-    
-    /* Background image applied to the entire details page */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    overflow: auto;
   }
   
+  /* Content container */
+  .details-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 50px;
+  }
+  
+  /* Overlay */
   .overlay {
-    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 10px;
-    max-width: 600px;
+    max-width: 800px;
     text-align: left;
-    width: 100%; /* Ensure overlay covers the content section */
+    z-index: 3;
   }
   
+  /* Poster and title section */
   .poster-title-section {
-    display: flex; /* Flex container for poster and details */
-    align-items: flex-start; /* Align items to the top */
-    margin-bottom: 15px; /* Space below the poster and title section */
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
   }
   
   .poster-rating-section {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center rating under poster */
-    margin-right: 20px; /* Space between poster and details */
+    align-items: center;
+    margin-right: 20px;
   }
   
   .additional-poster {
-    width: 120px; /* Adjust size of the additional poster */
+    width: 120px;
     height: auto;
-    margin-bottom: 10px; /* Space between poster and rating */
-    border-radius: 5px; /* Optional: rounding the corners of the poster */
+    margin-bottom: 10px;
+    border-radius: 5px;
   }
   
   .movie-rating-centered {
@@ -57,26 +70,240 @@
   .movie-title {
     font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 5px; /* Space below title */
+    margin-bottom: 5px;
   }
   
   .movie-info {
     font-size: 1.1rem;
-    color: #ccc; /* Softer color for metadata */
-    margin-bottom: 15px; /* Space below metadata */
+    color: #ccc;
+    margin-bottom: 15px;
   }
   
   .movie-description {
     font-size: 1.2rem;
-    margin-top: 10px; /* Space above description */
+    margin-top: 10px;
   }
   
+  /* Cast Section */
+  .cast-section {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cast-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .show-all-button {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    align-self: flex-end;
+    transition: color 0.3s ease;
+  }
+  
+  .show-all-button:hover {
+    color: #ddd;
+  }
+  
+  .cast-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    max-height: 200px;
+    overflow: hidden;
+  }
+  
+  .cast-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100px;
+  }
+  
+  .cast-member-photo {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 5px;
+  }
+  
+  .cast-member-name {
+    font-size: 0.9rem;
+    color: #fff;
+    text-align: center;
+  }
+  
+  /* Red Buttons Section */
+  .button-section {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    gap: 50px;
+    margin-top: 20px;
+  }
+  
+  .red-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .red-button:hover {
+    background-color: darkred;
+  }
+  
+  .red-button:focus {
+    outline: none;
+  }
+  
+  /* Similar Movies Section */
+  .similar-movies-section {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .similar-movies-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .similar-movies-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+  
+  .similar-movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px;
+  }
+  
+  .similar-movie-poster {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .similar-movie-title {
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+  }
+  
+  /* Media Queries for responsiveness */
   @media (max-width: 600px) {
     .movie-title {
       font-size: 2rem;
     }
+  
     .movie-description {
       font-size: 1rem;
+    }
+  
+    .cast-list {
+      justify-content: center;
+    }
+  
+    .cast-member-photo {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .similar-movie-poster {
+      width: 100px;
+      height: 150px;
+    }
+  
+    .button-section {
+      gap: 30px; /* Smaller gap between buttons */
+    }
+  }
+  
+  /* Additional media queries for 520px and below */
+  @media (max-width: 520px) {
+    /* Movie Title */
+    .movie-title {
+      font-size: 1.8rem; /* Make title smaller */
+    }
+  
+    /* Movie Description */
+    .movie-description {
+      font-size: 0.9rem; /* Make description smaller */
+    }
+  
+    /* Cast Section */
+    .cast-section h2 {
+      font-size: 20px; /* Smaller cast section title */
+    }
+  
+    .cast-list {
+      flex-direction: column; /* Stack cast members vertically */
+      align-items: center; /* Center cast members */
+      gap: 10px; /* Less gap between items */
+      max-height: none; /* Allow full list to show vertically */
+      overflow: visible; /* Remove hiding */
+    }
+  
+    .cast-member-photo {
+      width: 50px; /* Make cast member images smaller */
+      height: 50px;
+    }
+  
+    .cast-member-name {
+      font-size: 0.8rem; /* Smaller font for names */
+    }
+  
+    /* Similar Movies Section */
+    .similar-movies-list {
+      flex-direction: column; /* Stack similar movies vertically */
+      align-items: center; /* Center similar movie posters */
+      gap: 15px; /* Less gap */
+      overflow-x: visible; /* Allow the list to show vertically */
+    }
+  
+    .similar-movie-poster {
+      width: 80px; /* Smaller poster for similar movies */
+      height: 120px;
+    }
+  
+    .similar-movie-title {
+      font-size: 0.9rem; /* Smaller text for similar movie titles */
+    }
+  
+    /* Button Section */
+    .button-section {
+      flex-direction: column; /* Stack buttons vertically */
+      gap: 20px; /* More space between buttons */
+    }
+  
+    /* Ensure content is spaced properly and does not overlap */
+    .details-background {
+      padding: 10px; /* Smaller padding for smaller screens */
+    }
+  
+    .details-content {
+      margin-top: 20px; /* Reduce top margin */
     }
   }
   

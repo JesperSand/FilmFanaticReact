@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom'; // Import Link for routing
 import axios from 'axios';
 import './styles/DetailsPage.css';
 
@@ -11,14 +11,27 @@ const DetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cast, setCast] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]); // State for similar movies
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/movie/${id}`, {
+        const movieResponse = await axios.get(`${BASE_URL}/movie/${id}`, {
           params: { api_key: API_KEY, language: 'en-US' },
         });
-        setMovieDetails(response.data);
+        setMovieDetails(movieResponse.data);
+
+        const castResponse = await axios.get(`${BASE_URL}/movie/${id}/credits`, {
+          params: { api_key: API_KEY },
+        });
+        setCast(castResponse.data.cast);
+
+        const similarMoviesResponse = await axios.get(`${BASE_URL}/movie/${id}/similar`, {
+          params: { api_key: API_KEY, language: 'en-US' },
+        });
+        setSimilarMovies(similarMoviesResponse.data.results); // Set similar movies data
+
         setLoading(false);
       } catch (error) {
         setError("Failed to load movie details");
@@ -65,6 +78,49 @@ const DetailsPage = () => {
                 {releaseYear} · {ageRating} · {formattedRuntime}
               </p>
               <p className="movie-description">{movieDetails.overview}</p>
+            </div>
+          </div>
+
+          {/* Cast Section */}
+          <div className="cast-section">
+            <h2>Cast</h2>
+            <Link to={`/movie/${id}/cast`} className="show-all-button">
+              Show All
+            </Link>
+            <div className="cast-list">
+              {cast.slice(0, 6).map((actor) => (
+                <div key={actor.id} className="cast-member">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                    alt={actor.name}
+                    className="cast-member-photo"
+                  />
+                  <p className="cast-member-name">{actor.name}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Red Buttons Section */}
+            <div className="button-section">
+              <button className="red-button">Watch Trailer</button>
+              <button className="red-button">Add to List</button>
+            </div>
+          </div>
+
+          {/* Similar Movies Section */}
+          <div className="similar-movies-section">
+            <h2>Similar Movies</h2>
+            <div className="similar-movies-list">
+              {similarMovies.slice(0, 4).map((movie) => (
+                <Link to={`/movie/${movie.id}`} key={movie.id} className="similar-movie">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    alt={movie.title}
+                    className="similar-movie-poster"
+                  />
+                  <p className="similar-movie-title">{movie.title}</p>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
