@@ -1,56 +1,74 @@
 .details-background {
     width: 100%;
-    height: 100vh;
+    height: 100vh; /* Full height of the viewport */
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     color: white;
     padding: 20px;
-    text-align: center;
+    
+    /* Background image applied to the entire details page */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .overlay {
-    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for better readability */
+    background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
     padding: 20px;
     border-radius: 10px;
     max-width: 600px;
     text-align: left;
+    width: 100%; /* Ensure overlay covers the content section */
   }
   
   .poster-title-section {
-    display: flex; /* Flex container for poster and title */
-    align-items: center; /* Vertically center the items */
-    margin-bottom: 15px; /* Add some space between the title/poster and description */
+    display: flex; /* Flex container for poster and details */
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 15px; /* Space below the poster and title section */
+  }
+  
+  .poster-rating-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center rating under poster */
+    margin-right: 20px; /* Space between poster and details */
   }
   
   .additional-poster {
     width: 120px; /* Adjust size of the additional poster */
     height: auto;
-    margin-right: 20px; /* Space between the poster and title */
+    margin-bottom: 10px; /* Space between poster and rating */
     border-radius: 5px; /* Optional: rounding the corners of the poster */
+  }
+  
+  .movie-rating-centered {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-top: 5px;
+  }
+  
+  .text-section {
+    display: flex;
+    flex-direction: column;
   }
   
   .movie-title {
     font-size: 2.5rem;
     font-weight: bold;
-    flex-grow: 1; /* Title takes the remaining space */
+    margin-bottom: 5px; /* Space below title */
+  }
+  
+  .movie-info {
+    font-size: 1.1rem;
+    color: #ccc; /* Softer color for metadata */
+    margin-bottom: 15px; /* Space below metadata */
   }
   
   .movie-description {
     font-size: 1.2rem;
-    margin: 15px 0;
-  }
-  
-  .movie-release-date,
-  .movie-rating {
-    font-size: 1.1rem;
-    margin: 10px 0;
-  }
-  
-  .movie-release-date strong,
-  .movie-rating strong {
-    font-weight: bold;
+    margin-top: 10px; /* Space above description */
   }
   
   @media (max-width: 600px) {
