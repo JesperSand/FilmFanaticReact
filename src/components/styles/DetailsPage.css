@@ -1,243 +1,287 @@
+/* Existing CSS styles */
 .details-background {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    color: white;
-    padding: 20px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  .overlay {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-    text-align: left;
-  }
-  
-  .poster-title-section {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 15px;
-  }
-  
-  .poster-rating-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 20px;
-  }
-  
-  .additional-poster {
-    width: 180px;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .movie-rating-centered {
-    font-size: 1.1rem;
-    color: #fff;
-    margin-top: 5px;
-  }
-  
-  .text-section {
-    display: flex;
-    flex-direction: column;
-  }
-  
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: white;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+  text-align: left;
+}
+
+.poster-title-section {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.poster-rating-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.additional-poster {
+  width: 180px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.movie-rating-centered {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.text-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.movie-info {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.movie-description {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.cast-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the Cast Section */
+}
+
+.cast-header {
+  display: flex;
+  justify-content: space-between; /* This will space out the title and the button */
+  align-items: center;
+  width: 100%; /* Ensures the title and button are spaced across the full width */
+}
+
+.cast-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.show-all-button {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.show-all-button:hover {
+  text-decoration: underline;
+  color: #ddd;
+}
+
+.show-all-button:focus {
+  outline: none;
+}
+
+.cast-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 15px;
+  max-height: 200px;
+  overflow: hidden;
+  justify-content: center; /* Center the cast members */
+}
+
+.cast-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100px;
+}
+
+.cast-member-photo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.cast-member-name {
+  font-size: 0.9rem;
+  color: #fff;
+  text-align: center;
+}
+
+.button-section {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  gap: 50px;
+  margin-top: 20px;
+}
+
+.similar-movies-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the Similar Movies Section */
+}
+
+.similar-movies-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left; /* Left-align the title */
+  width: 100%; /* Ensure title uses full width */
+}
+
+.similar-movies-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+  justify-content: center; /* Center the movie posters horizontally */
+}
+
+.similar-movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 150px;
+}
+
+.similar-movie-poster {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.similar-movie-title {
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  margin-top: 5px;
+}
+
+/* Red Buttons Styling */
+.red-button {
+  color: white;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.red-button:hover {
+  background-color: darkred;
+}
+
+.read-more-button,
+.show-all-button {
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.read-more-button:hover,
+.show-all-button:hover {
+  text-decoration: underline;
+  color: #ddd;
+}
+
+.read-more-button:focus,
+.show-all-button:focus {
+  outline: none;
+}
+
+/* DetailsPage.css */
+
+/* Modal styles */
+.trailer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
   .movie-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .movie-info {
-    font-size: 1.1rem;
-    color: #ccc;
-    margin-bottom: 15px;
-  }
-  
-  .movie-description {
-    font-size: 1.2rem;
-    margin-top: 10px;
-  }
-  
-  .cast-section {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .cast-header {
-    display: flex;
-    justify-content: space-between; /* This will space out the title and the button */
-    align-items: center;
-    width: 100%; /* Ensures the title and button are spaced across the full width */
-  }
-  
-  .cast-section h2 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .show-all-button {
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .show-all-button:hover {
-    text-decoration: underline;
-    color: #ddd;
-  }
-  
-  .show-all-button:focus {
-    outline: none;
-  }
-  
-  .cast-list {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 15px;
-    max-height: 200px;
-    overflow: hidden;
-  }
-  
-  .cast-member {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 100px;
-  }
-  
-  .cast-member-photo {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 5px;
-  }
-  
-  .cast-member-name {
-    font-size: 0.9rem;
-    color: #fff;
-    text-align: center;
-  }
-  
-  .button-section {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    gap: 50px;
-    margin-top: 20px;
-  }
-  
-  .similar-movies-section {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .similar-movies-section h2 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .similar-movies-list {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 10px 0;
-  }
-  
-  .similar-movie {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 150px;
-  }
-  
-  .similar-movie-poster {
-    width: 120px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-  
-  .similar-movie-title {
-    font-size: 1rem;
-    text-align: center;
-    color: white;
-    margin-top: 5px;
-  }
-  
-  /* Red Buttons Styling */
-  .red-button {
-    color: white;
-    background-color: red;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .red-button:hover {
-    background-color: darkred;
-  }
-  
-  .read-more-button,
-  .show-all-button {
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    padding: 0;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .read-more-button:hover,
-  .show-all-button:hover {
-    text-decoration: underline;
-    color: #ddd;
-  }
-  
-  .read-more-button:focus,
-  .show-all-button:focus {
-    outline: none;
-  }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 600px) {
-    .movie-title {
       font-size: 2rem;
-    }
-  
-    .movie-description {
+  }
+
+  .movie-description {
       font-size: 1rem;
-    }
-  
-    .cast-list {
+  }
+
+  .cast-list {
       justify-content: center;
-    }
-  
-    .cast-member-photo {
+  }
+
+  .cast-member-photo {
       width: 50px;
       height: 50px;
-    }
   }
-  
+
+  .similar-movies-list {
+      justify-content: center; /* Ensure similar movies are centered on mobile */
+  }
+
+  .trailer-player {
+      height: 300px; /* Adjust trailer player height on mobile */
+  }
+}

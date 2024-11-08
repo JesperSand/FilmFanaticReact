@@ -13,10 +13,12 @@ const DetailsPage = () => {
   const [error, setError] = useState(null);
   const [cast, setCast] = useState([]);
   const [similarMovies, setSimilarMovies] = useState([]);
-  const [isExpanded, setIsExpanded] = useState(false); // Track if description is expanded
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // Track screen width
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [trailerKey, setTrailerKey] = useState(null); // To store trailer key
+  const [showTrailerModal, setShowTrailerModal] = useState(false); // Modal visibility state
 
-  const MAX_DESCRIPTION_LENGTH = 150; // Maximum length for truncated description
+  const MAX_DESCRIPTION_LENGTH = 150;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -35,6 +37,13 @@ const DetailsPage = () => {
           params: { api_key: API_KEY, language: 'en-US' },
         });
         setSimilarMovies(similarMoviesResponse.data.results);
+
+        // Fetch trailer data from the API
+        const videoResponse = await axios.get(`${BASE_URL}/movie/${id}/videos`, {
+          params: { api_key: API_KEY, language: 'en-US' },
+        });
+        const trailer = videoResponse.data.results.find((video) => video.type === 'Trailer');
+        setTrailerKey(trailer ? trailer.key : null);
 
         setLoading(false);
       } catch (error) {
@@ -64,10 +73,11 @@ const DetailsPage = () => {
   const minutes = runtime % 60;
   const formattedRuntime = runtime ? `${hours}h ${minutes}m` : 'N/A';
 
-  // Function to toggle description between truncated and full
   const toggleDescription = () => setIsExpanded(!isExpanded);
 
-  // Determine how many similar movies to show based on screen width
+  // Modal toggle function for showing/hiding trailer modal
+  const toggleTrailerModal = () => setShowTrailerModal(!showTrailerModal);
+
   const numberOfSimilarMovies = screenWidth > 720 ? 5 : 4;
 
   return (
@@ -97,11 +107,9 @@ const DetailsPage = () => {
                   {releaseYear} · {ageRating} · {formattedRuntime}
                 </p>
                 <p className="movie-description">
-                  {/* Conditionally render the full or truncated description */}
                   {isExpanded || movieDetails.overview.length <= MAX_DESCRIPTION_LENGTH
                     ? movieDetails.overview
                     : `${movieDetails.overview.slice(0, MAX_DESCRIPTION_LENGTH)}... `}
-                  {/* Show "Read More" or "Show Less" button based on isExpanded */}
                   {movieDetails.overview.length > MAX_DESCRIPTION_LENGTH && (
                     <button onClick={toggleDescription} className="read-more-button">
                       {isExpanded ? 'Show Less' : 'Read More'}
@@ -134,7 +142,11 @@ const DetailsPage = () => {
 
               {/* Red Buttons Section */}
               <div className="button-section">
-                <button className="red-button">Watch Trailer</button>
+                {trailerKey && (
+                  <button className="red-button" onClick={toggleTrailerModal}>
+                    Watch Trailer
+                  </button>
+                )}
                 <button className="red-button">Add to List</button>
               </div>
             </div>
@@ -157,6 +169,28 @@ const DetailsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Trailer Modal */}
+      {showTrailerModal && (
+        <div className="trailer-modal" onClick={toggleTrailerModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={toggleTrailerModal}>X</button>
+            {trailerKey ? (
+              <iframe
+                width="100%"
+                height="400px"
+                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&cc_load_policy=0`}
+                title="Movie Trailer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <p>Trailer not available.</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
