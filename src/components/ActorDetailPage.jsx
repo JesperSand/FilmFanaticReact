@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom'; // Import Link from react-router-dom
 import axios from 'axios';
 import './styles/ActorDetailPage.css';
 
@@ -14,7 +14,7 @@ function ActorDetailPage() {
   const [error, setError] = useState(null);
   const [isBioExpanded, setIsBioExpanded] = useState(false);
 
-  const MAX_BIO_LENGTH = 650;
+  const MAX_BIO_LENGTH = 300;
 
   useEffect(() => {
     const fetchActorDetails = async () => {
@@ -70,15 +70,19 @@ function ActorDetailPage() {
 
         {/* Known For Movies Section */}
         <div className="actor-films">
-          <h2>Known For</h2>
+          <div className="actor-films-header">
+            <h2>Known For</h2>
+          </div>
           <div className="films-list">
             {movies.map((movie) => (
               <div key={movie.id} className="film-item">
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                  alt={movie.title}
-                  className="film-poster"
-                />
+                <Link to={`/movie/${movie.id}`}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    alt={movie.title}
+                    className="film-poster"
+                  />
+                </Link>
               </div>
             ))}
           </div>
