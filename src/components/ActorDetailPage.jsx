@@ -14,7 +14,7 @@ function ActorDetailPage() {
   const [error, setError] = useState(null);
   const [isBioExpanded, setIsBioExpanded] = useState(false);
 
-  const MAX_BIO_LENGTH = 300;
+  const MAX_BIO_LENGTH = 650;
 
   useEffect(() => {
     const fetchActorDetails = async () => {
@@ -79,7 +79,6 @@ function ActorDetailPage() {
                   alt={movie.title}
                   className="film-poster"
                 />
-                <p>{movie.title}</p>
               </div>
             ))}
           </div>
