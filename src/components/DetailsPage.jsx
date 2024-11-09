@@ -18,7 +18,7 @@ function DetailsPage() {
   const [trailerKey, setTrailerKey] = useState(null);
   const [showTrailerModal, setShowTrailerModal] = useState(false);
 
-  const MAX_DESCRIPTION_LENGTH = 300;
+  const MAX_DESCRIPTION_LENGTH = 100;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -74,7 +74,7 @@ function DetailsPage() {
   const toggleTrailerModal = () => setShowTrailerModal(!showTrailerModal);
 
   const numberOfSimilarMovies = screenWidth > 720 ? 5 : 3;
-  const numberOfCastMembers = screenWidth > 720 ? 7 : 5;
+  const numberOfCastMembers = screenWidth > 720 ? 7 : 4;
 
   return (
     <div className="details-page">
