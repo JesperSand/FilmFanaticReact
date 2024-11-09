@@ -6,7 +6,7 @@ import './styles/DetailsPage.css';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-const DetailsPage = () => {
+function DetailsPage() {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,10 +15,10 @@ const DetailsPage = () => {
   const [similarMovies, setSimilarMovies] = useState([]);
   const [isExpanded, setIsExpanded] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [trailerKey, setTrailerKey] = useState(null); // To store trailer key
-  const [showTrailerModal, setShowTrailerModal] = useState(false); // Modal visibility state
+  const [trailerKey, setTrailerKey] = useState(null);
+  const [showTrailerModal, setShowTrailerModal] = useState(false);
 
-  const MAX_DESCRIPTION_LENGTH = 150;
+  const MAX_DESCRIPTION_LENGTH = 300;
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -38,7 +38,6 @@ const DetailsPage = () => {
         });
         setSimilarMovies(similarMoviesResponse.data.results);
 
-        // Fetch trailer data from the API
         const videoResponse = await axios.get(`${BASE_URL}/movie/${id}/videos`, {
           params: { api_key: API_KEY, language: 'en-US' },
         });
@@ -57,9 +56,7 @@ const DetailsPage = () => {
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
-
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -74,11 +71,10 @@ const DetailsPage = () => {
   const formattedRuntime = runtime ? `${hours}h ${minutes}m` : 'N/A';
 
   const toggleDescription = () => setIsExpanded(!isExpanded);
-
-  // Modal toggle function for showing/hiding trailer modal
   const toggleTrailerModal = () => setShowTrailerModal(!showTrailerModal);
 
-  const numberOfSimilarMovies = screenWidth > 720 ? 5 : 4;
+  const numberOfSimilarMovies = screenWidth > 720 ? 5 : 3;
+  const numberOfCastMembers = screenWidth > 720 ? 7 : 5;
 
   return (
     <div className="details-page">
@@ -128,7 +124,7 @@ const DetailsPage = () => {
                 </Link>
               </div>
               <div className="cast-list">
-                {cast.slice(0, 6).map((actor) => (
+                {cast.slice(0, numberOfCastMembers).map((actor) => (
                   <div key={actor.id} className="cast-member">
                     <img
                       src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
@@ -193,6 +189,6 @@ const DetailsPage = () => {
       )}
     </div>
   );
-};
+}
 
 export default DetailsPage;
