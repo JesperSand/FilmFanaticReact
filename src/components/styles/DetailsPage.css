@@ -94,12 +94,11 @@ body {
 .movie-info {
   font-size: 1.1rem;
   color: #ccc;
-  margin-bottom: 15px;
 }
 
 .movie-description {
   font-size: 1.2rem;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 /* Read More Button Styling */
