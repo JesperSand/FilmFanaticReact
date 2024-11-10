@@ -51,6 +51,7 @@ body {
   max-width: 800px;
   text-align: left;
   margin-top: 1vh; /* Adjust to push the overlay further down without causing gaps */
+  z-index: 10; /* Ensure overlay stays below the modal */
 }
 
 .poster-title-section {
@@ -270,6 +271,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999; /* Ensure the modal is above all other content */
 }
 
 .modal-content {
@@ -277,6 +279,8 @@ body {
   border-radius: 8px;
   width: 80%;
   max-width: 800px;
+  position: relative; /* Ensure modal content stays within the modal */
+  z-index: 10000; /* Ensure modal content stays on top of its container */
 }
 
 .close-btn {
@@ -287,6 +291,7 @@ body {
   border: none;
   font-size: 1.5em;
   cursor: pointer;
+  color: white; /* Ensure close button is visible */
 }
 
 /* Mobile Responsiveness */
@@ -378,5 +383,9 @@ body {
 
   .similar-movie-title {
     font-size: 0.9rem;
+  }
+
+  .red-button {
+    font-size: 0.8rem; /* Smaller button text */
   }
 }
