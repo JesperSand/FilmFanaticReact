@@ -171,9 +171,10 @@ body {
 .cast-member {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the content horizontally */
-  justify-content: center; /* Center the content vertically */
+  align-items: center; /* Center both image and name */
+  justify-content: center; /* Keep them aligned vertically */
   max-width: 100px;
+  height: 100%; /* Ensure the height of the member is consistent */
 }
 
 .cast-member-photo {
@@ -182,8 +183,8 @@ body {
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 5px;
-  display: block; /* Ensures the image is treated as a block-level element for centering */
-  margin-left: auto; /* Centers the image horizontally within the flex container */
+  display: block;
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -191,6 +192,8 @@ body {
   font-size: 0.9rem;
   color: #fff;
   text-align: center;
+  display: block; /* Ensure the name is treated as a block */
+  line-height: 1.2; /* Adjust the line height for consistent vertical alignment */
 }
 
 /* Button Section */
