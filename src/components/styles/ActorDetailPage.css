@@ -26,6 +26,7 @@
     align-items: flex-start; /* Keeps the name and bio next to the image */
     margin-bottom: 40px;
     width: 100%;
+    position: relative; /* Enables positioning for the back button */
 }
 
 /* Actor Photo */
@@ -34,6 +35,7 @@
     width: 180px;
     height: auto;
     object-fit: cover;
+    margin-top: 25px;
     margin-right: 30px;
 }
 
@@ -56,6 +58,32 @@
     margin: 0;
 }
 
+/* Back Button Styling */
+.back-button {
+    position: absolute; /* Absolute position relative to the parent */
+    left: -25px; /* Move further to the left of the image */
+    top: -20px; /* 15px above the image */
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    z-index: 10; /* Ensure it appears above other elements */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    margin-left: 0; /* Remove any manual offset */
+}
+
+.back-button:hover {
+    color: #ccc; /* Lighter color on hover */
+}
+
+.back-icon {
+    font-size: 24px;
+}
+
 /* Read More Button */
 .read-more-button {
     background: none;
@@ -75,7 +103,7 @@
     outline: none;
 }
 
-/* Show All Button (updated to match Read More button style) */
+/* Show All Button */
 .show-all-button {
     background: none;
     color: #ffffff;
