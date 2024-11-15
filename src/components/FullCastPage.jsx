@@ -43,7 +43,10 @@ const FullCastPage = () => {
               alt={actor.name}
               className="cast-member-photo"
             />
-            <p className="cast-member-name">{actor.name}</p>
+            <div className="cast-member-info">
+              <p className="cast-member-name">{actor.name}</p>
+              {actor.character && <p className="cast-member-role">as {actor.character}</p>}
+            </div>
           </div>
         ))}
       </div>

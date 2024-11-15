@@ -1,0 +1,124 @@
+/* Full Cast Page Styles */
+.full-cast-page {
+    padding: 20px;
+    text-align: center;
+}
+
+.full-cast-page h1 {
+    font-size: 3rem; /* Increased title size */
+    font-weight: bold;
+    margin-bottom: 30px; /* More space below title */
+    color: #fff;
+}
+
+/* Cast List Container - Flexbox Layout for list */
+.full-cast-list {
+    display: flex;
+    flex-direction: column; /* Stack the cast members vertically */
+    gap: 25px; /* Increased space between rows */
+    padding: 0 10px;
+    margin-top: 30px; /* Increased space from title */
+    align-items: center; /* Ensure the entire list is centered */
+}
+
+/* Cast Member Row */
+.cast-member {
+    display: flex;
+    flex-direction: column; /* Stack image, name, and role vertically */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    gap: 10px; /* Increased gap between image, name, and role */
+    width: 100%;
+    padding: 15px; /* Increased padding around each cast member */
+}
+
+/* Cast Member Image */
+.cast-member-photo {
+    width: 80px; /* Larger image size */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px; /* Slightly larger border radius */
+}
+
+/* Cast Member Info Section - Centered vertically and horizontally */
+.cast-member-info {
+    display: flex;
+    flex-direction: column; /* Stack name and role vertically */
+    justify-content: center;
+    align-items: center; /* Center name and role under image */
+    text-align: center; /* Center-align text */
+}
+
+/* Cast Member Name (First + Last) and Role Styling */
+.cast-member-name {
+    font-size: 1.3rem; /* Larger name size */
+    color: #fff;
+    font-weight: bold;
+    white-space: nowrap; /* Prevent name from wrapping */
+}
+
+.cast-member-role {
+    font-size: 1.1rem; /* Larger role size */
+    color: #ccc;
+    margin-top: 5px; /* Add a little space between name and role */
+}
+
+/* Loading/Error States */
+p {
+    font-size: 1.4rem; /* Increased font size for better readability */
+    color: #ccc;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .full-cast-page h1 {
+        font-size: 2.5rem; /* Larger heading on mobile */
+    }
+
+    .cast-member {
+        flex-direction: column; /* Stack image, name, and role vertically */
+        align-items: center; /* Center items vertically */
+        gap: 15px; /* Increased gap for mobile view */
+    }
+
+    .cast-member-photo {
+        width: 70px; /* Larger image on mobile */
+        height: 100px;
+    }
+
+    .cast-member-info {
+        align-items: center; /* Ensure name and role are centered under the image */
+        text-align: center; /* Center-align text for better readability */
+    }
+
+    .cast-member-name {
+        font-size: 1.1rem; /* Larger name on mobile */
+    }
+
+    .cast-member-role {
+        font-size: 1rem; /* Larger role on mobile */
+        margin-top: 5px; /* Add some space between name and role */
+    }
+}
+
+/* Larger Screens (PCs) */
+@media (min-width: 769px) {
+    .cast-member {
+        flex-direction: row; /* Display in a row format on desktops */
+        align-items: center; /* Center items vertically */
+        gap: 25px; /* Increased gap between image, name, and role */
+    }
+
+    .cast-member-info {
+        align-items: flex-start; /* Align name and role next to image */
+        text-align: left; /* Align text left on large screens */
+    }
+
+    .cast-member-name {
+        white-space: nowrap; /* Ensure name stays on one line */
+    }
+
+    .cast-member-role {
+        margin-top: 5px; /* Space between name and role */
+    }
+}
