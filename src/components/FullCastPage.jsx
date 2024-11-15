@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles/FullCastPage.css';
 
@@ -11,6 +11,7 @@ const FullCastPage = () => {
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCastDetails = async () => {
@@ -34,18 +35,27 @@ const FullCastPage = () => {
 
   return (
     <div className="full-cast-page">
-      <h1>Full Cast</h1>
+      {/* Full Cast Header */}
+      <div className="full-cast-header">
+        {/* Back Button */}
+        <button onClick={() => navigate(-1)} className="back-button-fullCast">
+          <span className="back-icon">←</span>Back
+        </button>
+        <h1>Full Cast</h1>
+      </div>
+
+      {/* Full Cast List */}
       <div className="full-cast-list">
         {cast.map((actor) => (
-          <div key={actor.id} className="cast-member">
+          <div key={actor.id} className="full-cast-actor">
             <img
               src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
               alt={actor.name}
-              className="cast-member-photo"
+              className="full-cast-actor-photo"
             />
-            <div className="cast-member-info">
-              <p className="cast-member-name">{actor.name}</p>
-              {actor.character && <p className="cast-member-role">as {actor.character}</p>}
+            <div className="full-cast-actor-info">
+              <p className="full-cast-actor-name">{actor.name}</p>
+              {actor.character && <p className="full-cast-actor-role">as {actor.character}</p>}
             </div>
           </div>
         ))}

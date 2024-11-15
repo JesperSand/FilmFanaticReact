@@ -4,60 +4,71 @@
     text-align: center;
 }
 
+/* Align the back button and title in a row */
+.full-cast-header {
+    display: flex;
+    align-items: center; /* Align the back button and title vertically in the center */
+    justify-content: flex-start; /* Align the content to the left */
+    gap: 15px; /* Space between the button and title */
+}
+
 .full-cast-page h1 {
     font-size: 3rem; /* Increased title size */
     font-weight: bold;
-    margin-bottom: 30px; /* More space below title */
     color: #fff;
+    margin-bottom: 0; /* Remove bottom margin to keep the button and title close */
 }
 
-/* Cast List Container - Flexbox Layout for list */
+/* Full Cast List Container - Flexbox Layout for list */
 .full-cast-list {
     display: flex;
     flex-direction: column; /* Stack the cast members vertically */
-    gap: 25px; /* Increased space between rows */
+    gap: 15px; /* Increased space between rows */
     padding: 0 10px;
     margin-top: 30px; /* Increased space from title */
     align-items: center; /* Ensure the entire list is centered */
 }
 
-/* Cast Member Row */
-.cast-member {
+/* Full Cast Actor Row */
+.full-cast-actor {
     display: flex;
-    flex-direction: column; /* Stack image, name, and role vertically */
+    flex-direction: row; /* Align image and text horizontally */
     align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    gap: 10px; /* Increased gap between image, name, and role */
+    gap: 15px; /* Space between image and text */
     width: 100%;
-    padding: 15px; /* Increased padding around each cast member */
+    padding: 15px; /* Increased padding around each actor */
 }
 
-/* Cast Member Image */
-.cast-member-photo {
-    width: 80px; /* Larger image size */
-    height: 120px;
+/* Full Cast Actor Image */
+.full-cast-actor-photo {
+    width: 120px; /* Even larger image size */
+    height: 100%; /* Even larger image height */
     object-fit: cover;
     border-radius: 8px; /* Slightly larger border radius */
+    flex-shrink: 0; /* Prevent the image from shrinking */
+    margin-left: 0px;
 }
 
-/* Cast Member Info Section - Centered vertically and horizontally */
-.cast-member-info {
+/* Full Cast Actor Info Section - Stack name and role vertically */
+.full-cast-actor-info {
     display: flex;
     flex-direction: column; /* Stack name and role vertically */
     justify-content: center;
-    align-items: center; /* Center name and role under image */
-    text-align: center; /* Center-align text */
+    align-items: flex-start; /* Align name and role to the left */
+    text-align: left; /* Left-align text */
 }
 
-/* Cast Member Name (First + Last) and Role Styling */
-.cast-member-name {
+/* Full Cast Actor Name and Role Styling */
+.full-cast-actor-name {
     font-size: 1.3rem; /* Larger name size */
     color: #fff;
     font-weight: bold;
     white-space: nowrap; /* Prevent name from wrapping */
+    overflow: hidden; /* Ensure long names don't overflow */
+    text-overflow: ellipsis; /* Add ellipsis when name is too long */
 }
 
-.cast-member-role {
+.full-cast-actor-role {
     font-size: 1.1rem; /* Larger role size */
     color: #ccc;
     margin-top: 5px; /* Add a little space between name and role */
@@ -69,33 +80,61 @@ p {
     color: #ccc;
 }
 
+/* Back Button Styles */
+.back-button-fullCast {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 1rem; /* Smaller font size for the back text */
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Back Button Hover Effect */
+.back-button-fullCast:hover {
+    color: #ccc; /* Lighter color on hover */
+}
+
+/* Back Button Icon */
+.back-icon {
+    font-size: 24px; /* Keeps the arrow size large */
+}
+
+/* Back Button Text */
+.back-button-fullCast span {
+    font-size: 24px; /* Smaller text size for "Back" */
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .full-cast-page h1 {
         font-size: 2.5rem; /* Larger heading on mobile */
     }
 
-    .cast-member {
+    .full-cast-actor {
         flex-direction: column; /* Stack image, name, and role vertically */
         align-items: center; /* Center items vertically */
         gap: 15px; /* Increased gap for mobile view */
     }
 
-    .cast-member-photo {
-        width: 70px; /* Larger image on mobile */
-        height: 100px;
+    .full-cast-actor-photo {
+        width: 80px; /* Larger image on mobile */
+        height: 120px;
     }
 
-    .cast-member-info {
+    .full-cast-actor-info {
         align-items: center; /* Ensure name and role are centered under the image */
         text-align: center; /* Center-align text for better readability */
     }
 
-    .cast-member-name {
+    .full-cast-actor-name {
         font-size: 1.1rem; /* Larger name on mobile */
     }
 
-    .cast-member-role {
+    .full-cast-actor-role {
         font-size: 1rem; /* Larger role on mobile */
         margin-top: 5px; /* Add some space between name and role */
     }
@@ -103,22 +142,26 @@ p {
 
 /* Larger Screens (PCs) */
 @media (min-width: 769px) {
-    .cast-member {
+    .full-cast-actor {
         flex-direction: row; /* Display in a row format on desktops */
         align-items: center; /* Center items vertically */
         gap: 25px; /* Increased gap between image, name, and role */
+        justify-content: flex-start; /* Align content to the left, keep it centered with image */
     }
 
-    .cast-member-info {
+    .full-cast-actor-info {
         align-items: flex-start; /* Align name and role next to image */
         text-align: left; /* Align text left on large screens */
+        max-width: 70%; /* Limit the width of the text to make it appear more centered */
     }
 
-    .cast-member-name {
+    .full-cast-actor-name {
         white-space: nowrap; /* Ensure name stays on one line */
+        overflow: hidden; /* Prevent overflow of name */
+        text-overflow: ellipsis; /* Add ellipsis when name is too long */
     }
 
-    .cast-member-role {
+    .full-cast-actor-role {
         margin-top: 5px; /* Space between name and role */
     }
 }
