@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles/DetailsPage.css';
 
@@ -8,6 +8,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 function DetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [movieDetails, setMovieDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -85,6 +86,11 @@ function DetailsPage() {
         }}
       >
         <div className="details-content">
+          {/* Back Button positioned outside the overlay but close to it */}
+          <button className="back-button-details" onClick={() => navigate(-1)}>
+            <span className="back-icon">←</span> Back
+          </button>
+
           <div className="overlay">
             <div className="poster-title-section">
               <div className="poster-rating-section">
