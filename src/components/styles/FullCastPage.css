@@ -2,6 +2,11 @@
 .full-cast-page {
     padding: 20px;
     text-align: center;
+    display: flex; /* Ensure the page uses flexbox */
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center; /* Ensure child elements are centered horizontally */
+    min-height: 100vh; /* Ensure it takes full viewport height */
 }
 
 /* Align the back button and title in a row */
@@ -37,6 +42,7 @@
     gap: 15px; /* Space between image and text */
     width: 100%;
     padding: 15px; /* Increased padding around each actor */
+    justify-content: flex-start; /* Align content to the left by default */
 }
 
 /* Full Cast Actor Image */
