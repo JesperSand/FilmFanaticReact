@@ -1,13 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Film Fanatic</title>
+
+    <!-- Linking the manifest file -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/path-to-your-favicon.ico" />
+
+    <!-- Safari PWA meta tags (if you're targeting Safari) -->
+    <meta name="apple-mobile-web-app-title" content="Film Fanatic" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- App Stylesheets and Scripts -->
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" crossorigin src="/src/index.js"></script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
