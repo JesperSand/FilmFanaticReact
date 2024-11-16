@@ -2,96 +2,32 @@
 .full-cast-page {
     padding: 20px;
     text-align: center;
-    display: flex; /* Ensure the page uses flexbox */
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: flex-start; /* Align content to the top */
-    align-items: center; /* Ensure child elements are centered horizontally */
-    min-height: 100vh; /* Ensure it takes full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
 }
 
-/* Align the back button and title in a row */
+/* Header container to allow absolute positioning */
 .full-cast-header {
     display: flex;
-    align-items: center; /* Align the back button and title vertically in the center */
-    justify-content: flex-start; /* Align the content to the left */
-    gap: 15px; /* Space between the button and title */
-}
-
-.full-cast-page h1 {
-    font-size: 3rem; /* Increased title size */
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 0; /* Remove bottom margin to keep the button and title close */
-}
-
-/* Full Cast List Container - Flexbox Layout for list */
-.full-cast-list {
-    display: flex;
-    flex-direction: column; /* Stack the cast members vertically */
-    gap: 15px; /* Increased space between rows */
-    padding: 0 10px;
-    margin-top: 30px; /* Increased space from title */
-    align-items: center; /* Ensure the entire list is centered */
-}
-
-/* Full Cast Actor Row */
-.full-cast-actor {
-    display: flex;
-    flex-direction: row; /* Align image and text horizontally */
-    align-items: center; /* Center items vertically */
-    gap: 15px; /* Space between image and text */
+    justify-content: flex-start; /* Ensure the button is aligned to the left */
+    align-items: flex-start;
+    position: relative; /* This allows us to use absolute positioning for both button and title */
     width: 100%;
-    padding: 15px; /* Increased padding around each actor */
-    justify-content: flex-start; /* Align content to the left by default */
-}
-
-/* Full Cast Actor Image */
-.full-cast-actor-photo {
-    width: 120px; /* Even larger image size */
-    height: 100%; /* Even larger image height */
-    object-fit: cover;
-    border-radius: 8px; /* Slightly larger border radius */
-    flex-shrink: 0; /* Prevent the image from shrinking */
-    margin-left: 0px;
-}
-
-/* Full Cast Actor Info Section - Stack name and role vertically */
-.full-cast-actor-info {
-    display: flex;
-    flex-direction: column; /* Stack name and role vertically */
-    justify-content: center;
-    align-items: flex-start; /* Align name and role to the left */
-    text-align: left; /* Left-align text */
-}
-
-/* Full Cast Actor Name and Role Styling */
-.full-cast-actor-name {
-    font-size: 1.3rem; /* Larger name size */
-    color: #fff;
-    font-weight: bold;
-    white-space: nowrap; /* Prevent name from wrapping */
-    overflow: hidden; /* Ensure long names don't overflow */
-    text-overflow: ellipsis; /* Add ellipsis when name is too long */
-}
-
-.full-cast-actor-role {
-    font-size: 1.1rem; /* Larger role size */
-    color: #ccc;
-    margin-top: 5px; /* Add a little space between name and role */
-}
-
-/* Loading/Error States */
-p {
-    font-size: 1.4rem; /* Increased font size for better readability */
-    color: #ccc;
+    margin-bottom: 90px;
 }
 
 /* Back Button Styles */
 .back-button-fullCast {
+    position: absolute; /* Position the button in the top-left corner */
+    top: 20px; /* Add some spacing from the top */
+    left: -20px; /* Add some spacing from the left */
     background-color: transparent;
     color: #fff;
     border: none;
-    font-size: 1rem; /* Smaller font size for the back text */
+    font-size: 1rem;
     cursor: pointer;
     transition: color 0.3s ease;
     display: inline-flex;
@@ -101,73 +37,154 @@ p {
 
 /* Back Button Hover Effect */
 .back-button-fullCast:hover {
-    color: #ccc; /* Lighter color on hover */
+    color: #ccc;
 }
 
 /* Back Button Icon */
 .back-icon {
-    font-size: 24px; /* Keeps the arrow size large */
+    font-size: 24px;
 }
 
 /* Back Button Text */
 .back-button-fullCast span {
-    font-size: 24px; /* Smaller text size for "Back" */
+    font-size: 24px;
+}
+
+/* Title centered at the top of the screen */
+.full-cast-page h1 {
+    position: absolute; /* Position the title at the top */
+    top: 20px; /* Place it at the top with some margin */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half its width to center it */
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+    text-align: center; /* Center text within the title */
+}
+
+/* Full Cast List Container - Flexbox Layout for list */
+.full-cast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 10px;
+    margin-top: 30px;
+    align-items: center;
+}
+
+/* Make the Link behave like a block element */
+.full-cast-actor-link {
+    display: block; /* Ensures the Link is block-level */
+    width: 100%; /* Ensure it stretches the full width of the container */
+    text-decoration: none; /* Remove default link styling */
+}
+
+/* Full Cast Actor Row */
+.full-cast-actor {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px; /* Limit max width for readability */
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Actor Image */
+.full-cast-actor-photo {
+    width: 120px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Actor Info Section */
+.full-cast-actor-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: #fff;
+}
+
+/* Actor Name */
+.full-cast-actor-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Actor Role */
+.full-cast-actor-role {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+/* Loading/Error States */
+p {
+    font-size: 1.4rem;
+    color: #ccc;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .full-cast-page h1 {
-        font-size: 2.5rem; /* Larger heading on mobile */
+        font-size: 2.5rem;
     }
 
     .full-cast-actor {
-        flex-direction: column; /* Stack image, name, and role vertically */
-        align-items: center; /* Center items vertically */
-        gap: 15px; /* Increased gap for mobile view */
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
     }
 
     .full-cast-actor-photo {
-        width: 80px; /* Larger image on mobile */
+        width: 80px;
         height: 120px;
     }
 
     .full-cast-actor-info {
-        align-items: center; /* Ensure name and role are centered under the image */
-        text-align: center; /* Center-align text for better readability */
+        align-items: center;
+        text-align: center;
     }
 
     .full-cast-actor-name {
-        font-size: 1.1rem; /* Larger name on mobile */
+        font-size: 1.1rem;
     }
 
     .full-cast-actor-role {
-        font-size: 1rem; /* Larger role on mobile */
-        margin-top: 5px; /* Add some space between name and role */
+        font-size: 1rem;
+        margin-top: 5px;
     }
 }
 
 /* Larger Screens (PCs) */
 @media (min-width: 769px) {
     .full-cast-actor {
-        flex-direction: row; /* Display in a row format on desktops */
-        align-items: center; /* Center items vertically */
-        gap: 25px; /* Increased gap between image, name, and role */
-        justify-content: flex-start; /* Align content to the left, keep it centered with image */
+        flex-direction: row;
+        align-items: center;
+        gap: 25px;
+        justify-content: flex-start;
     }
 
     .full-cast-actor-info {
-        align-items: flex-start; /* Align name and role next to image */
-        text-align: left; /* Align text left on large screens */
-        max-width: 70%; /* Limit the width of the text to make it appear more centered */
+        align-items: flex-start;
+        text-align: left;
+        max-width: 70%;
     }
 
     .full-cast-actor-name {
-        white-space: nowrap; /* Ensure name stays on one line */
-        overflow: hidden; /* Prevent overflow of name */
-        text-overflow: ellipsis; /* Add ellipsis when name is too long */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .full-cast-actor-role {
-        margin-top: 5px; /* Space between name and role */
+        margin-top: 5px;
     }
 }

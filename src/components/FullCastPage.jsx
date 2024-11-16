@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom'; // Import Link
 import axios from 'axios';
 import './styles/FullCastPage.css';
 
@@ -47,17 +47,19 @@ const FullCastPage = () => {
       {/* Full Cast List */}
       <div className="full-cast-list">
         {cast.map((actor) => (
-          <div key={actor.id} className="full-cast-actor">
-            <img
-              src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-              alt={actor.name}
-              className="full-cast-actor-photo"
-            />
-            <div className="full-cast-actor-info">
-              <p className="full-cast-actor-name">{actor.name}</p>
-              {actor.character && <p className="full-cast-actor-role">as {actor.character}</p>}
+          <Link to={`/actor/${actor.id}`} className="full-cast-actor-link" key={actor.id}>
+            <div className="full-cast-actor">
+              <img
+                src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                alt={actor.name}
+                className="full-cast-actor-photo"
+              />
+              <div className="full-cast-actor-info">
+                <p className="full-cast-actor-name">{actor.name}</p>
+                {actor.character && <p className="full-cast-actor-role">as {actor.character}</p>}
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
