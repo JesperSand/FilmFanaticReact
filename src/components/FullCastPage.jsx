@@ -14,6 +14,10 @@ const FullCastPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    // Scroll to the top when the page is loaded
+    window.scrollTo(0, 0);
+    
     const fetchCastDetails = async () => {
       try {
         const castResponse = await axios.get(`${BASE_URL}/movie/${id}/credits`, {

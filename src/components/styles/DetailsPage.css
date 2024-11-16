@@ -330,7 +330,7 @@ body {
   }
 
   .overlay {
-    margin-top: 5vh; /* Reduced margin to bring the overlay closer to the top */
+    margin-top: 7vh; /* Reduced margin to bring the overlay closer to the top */
     padding: 10px;
   }
 
@@ -369,7 +369,7 @@ body {
   }
 
   .overlay {
-    margin-top: 3vh; /* Reduced margin even more */
+    margin-top: 6vh; /* Reduced margin even more */
     padding: 10px;
   }
 

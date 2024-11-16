@@ -17,6 +17,10 @@ const HomePage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
+    // Scroll to the top when the page is loaded
+    window.scrollTo(0, 0);
+
     const fetchMovies = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/movie/popular`, {

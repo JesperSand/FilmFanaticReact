@@ -22,6 +22,10 @@ function DetailsPage() {
   const MAX_DESCRIPTION_LENGTH = 300;
 
   useEffect(() => {
+
+    // Scroll to the top when the page is loaded
+    window.scrollTo(0, 0);
+
     const fetchMovieDetails = async () => {
       try {
         const movieResponse = await axios.get(`${BASE_URL}/movie/${id}`, {
