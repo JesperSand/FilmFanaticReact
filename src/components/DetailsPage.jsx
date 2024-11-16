@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles/DetailsPage.css';
+import HomeBar from './HomeBar'; // Import HomeBar component
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -22,7 +23,6 @@ function DetailsPage() {
   const MAX_DESCRIPTION_LENGTH = 300;
 
   useEffect(() => {
-
     // Scroll to the top when the page is loaded
     window.scrollTo(0, 0);
 
@@ -83,6 +83,9 @@ function DetailsPage() {
 
   return (
     <div className="details-page">
+      {/* Render HomeBar at the top of the page */}
+      <HomeBar />
+
       <div
         className="details-background"
         style={{
@@ -136,7 +139,7 @@ function DetailsPage() {
               <div className="cast-list">
                 {cast.slice(0, numberOfCastMembers).map((actor) => (
                   <div key={actor.id} className="cast-member">
-                    <Link to={`/actor/${actor.id}`}>  {/* Link to actor's details page */}
+                    <Link to={`/actor/${actor.id}`}>
                       <img
                         src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                         alt={actor.name}

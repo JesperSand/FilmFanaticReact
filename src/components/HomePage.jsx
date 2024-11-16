@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import axios from 'axios';
 import './styles/HomePage.css';
+import HomeBar from './HomeBar'; // Import HomeBar component
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -17,7 +18,6 @@ const HomePage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
     // Scroll to the top when the page is loaded
     window.scrollTo(0, 0);
 
@@ -195,6 +195,9 @@ const HomePage = () => {
           </div>
         ))}
       </div>
+
+      {/* Add HomeBar at the bottom */}
+      <HomeBar />
     </div>
   );
 };

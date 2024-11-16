@@ -7,6 +7,7 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
+    margin-bottom: 80px;
 }
 
 /* Header container to allow absolute positioning */
@@ -91,6 +92,7 @@
     border-radius: 10px;
     transition: background-color 0.3s ease;
 }
+
 
 /* Actor Image */
 .full-cast-actor-photo {

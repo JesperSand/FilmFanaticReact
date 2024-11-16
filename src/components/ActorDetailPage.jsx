@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles/ActorDetailPage.css';
+import HomeBar from './HomeBar'; // Import the HomeBar component
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 function ActorDetailPage() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const { actorId } = useParams();
   const [actorDetails, setActorDetails] = useState(null);
   const [movies, setMovies] = useState([]);
@@ -123,6 +124,9 @@ function ActorDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* HomeBar Component */}
+      <HomeBar />
     </div>
   );
 }

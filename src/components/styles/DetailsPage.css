@@ -65,6 +65,7 @@ body {
   align-items: center;
   flex-direction: column;
   z-index: 1; /* Ensures content appears above the background */
+  padding-bottom: 70px; /* Adds space at the bottom */
 }
 
 /* Overlay Section */
