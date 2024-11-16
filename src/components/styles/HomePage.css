@@ -15,6 +15,31 @@ body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+  /* Reset button styles across the entire app */
+  button {
+    background: none; /* Remove any background */
+    border: none; /* Remove any border */
+    color: inherit; /* Inherit the color from the parent container */
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: text-decoration 0.3s ease, background-color 0.3s ease; /* Smooth transition for text-decoration */
+    outline: none; /* Remove the default outline */
+    text-decoration: none; /* Remove text decoration */
+  }
+  
+  button:hover {
+    background-color: transparent; /* Ensure no background color is added on hover */
+  }
+  
+  /* Optional: remove focus outline on buttons (for custom focus styles) */
+  button:focus {
+    outline: none;
+  }
+  
+  
+
 .container {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import './styles/DetailsPage.css';
 import HomeBar from './HomeBar'; // Import HomeBar component
 
@@ -81,6 +83,51 @@ function DetailsPage() {
   const numberOfSimilarMovies = screenWidth > 720 ? 5 : 3;
   const numberOfCastMembers = screenWidth > 720 ? 7 : 4;
 
+  const addToList = async () => {
+    const user = getAuth().currentUser;
+
+    if (!user) {
+      console.log('User is not authenticated');
+      return;
+    }
+
+    const db = getFirestore();
+    const userRef = doc(db, 'users', user.uid);
+    const userDocSnap = await getDoc(userRef);
+
+    if (!userDocSnap.exists()) {
+      try {
+        // Create the document if it doesn't exist
+        await setDoc(userRef, {
+          name: user.displayName,
+          email: user.email,
+          movieList: [], // Initialize movie list as an empty array
+        });
+        console.log('User document created');
+      } catch (error) {
+        console.error('Error creating user document: ', error);
+        return;
+      }
+    }
+
+    try {
+      // Proceed to add the movie to the user's list
+      await updateDoc(userRef, {
+        movieList: arrayUnion({
+          id: movieDetails.id,
+          title: movieDetails.title,
+          poster_path: movieDetails.poster_path,
+          release_date: movieDetails.release_date,
+          imdb_rating: movieDetails.vote_average,  // Use vote_average from TMDB response
+          overview: movieDetails.overview,
+        }),
+      });
+      console.log('Movie added to list');
+    } catch (error) {
+      console.error('Error adding movie to list: ', error);
+    }
+  };
+
   return (
     <div className="details-page">
       {/* Render HomeBar at the top of the page */}
@@ -158,7 +205,9 @@ function DetailsPage() {
                     Watch Trailer
                   </button>
                 )}
-                <button className="red-button">Add to List</button>
+                <button className="red-button" onClick={addToList}>
+                  Add to List
+                </button>
               </div>
             </div>
 
@@ -190,14 +239,13 @@ function DetailsPage() {
               <iframe
                 width="100%"
                 height="400px"
-                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&cc_load_policy=0`}
-                title="Movie Trailer"
+                src={`https://www.youtube.com/embed/${trailerKey}`}
+                title="Trailer"
                 frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             ) : (
-              <p>Trailer not available.</p>
+              <p>No trailer available</p>
             )}
           </div>
         </div>

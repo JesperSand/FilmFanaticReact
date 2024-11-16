@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase';  // Adjust the path according to your file structure
@@ -14,6 +14,18 @@ const LoginPage = () => {
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
+
+  useEffect(() => {
+    // Check if the user is already logged in when the login page is loaded
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate('/home');  // Redirect to homepage if the user is already logged in
+      }
+    });
+
+    // Cleanup function to unsubscribe from the listener
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,12 +43,12 @@ const LoginPage = () => {
         // Register the user with Firebase Authentication
         await createUserWithEmailAndPassword(auth, email, password);
         setLoading(false);
-        navigate('/profile');  // Redirect to profile after successful registration
+        navigate('/home');  // Redirect to homepage after successful registration
       } else {
         // Sign in the user with Firebase Authentication
         await signInWithEmailAndPassword(auth, email, password);
         setLoading(false);
-        navigate('/profile');  // Redirect to profile after successful login
+        navigate('/home');  // Redirect to homepage after successful login
       }
     } catch (error) {
       setLoading(false);

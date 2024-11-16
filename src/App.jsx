@@ -12,10 +12,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* Set LoginPage as the first route */}
+        <Route path="/" element={<LoginPage />} />  {/* Default route shows LoginPage */}
+        
+        <Route path="/home" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/login" element={<LoginPage />} /> {/* Add Login route */}
         <Route path="/movie/:id" element={<DetailsPage />} />
         <Route path="/movie/:id/cast" element={<FullCastPage />} />
         <Route path="/actor/:actorId" element={<ActorDetailPage />} />

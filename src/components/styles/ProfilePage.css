@@ -1,0 +1,130 @@
+/* General Profile Page Styles */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers horizontally */
+  justify-content: flex-start; /* Align content to the top */
+  height: 100vh; /* Full height of the viewport */
+  background-color: #121212;
+  color: white;
+  padding-top: 80px; /* Adds space for fixed profile details */
+}
+
+.profile-content {
+  text-align: center; /* Centers the text inside the profile-content */
+  width: 100%;
+}
+
+.profile-details {
+  position: fixed; /* Fix the profile details at the top */
+  top: 0;
+  left: 0;
+  width: 100%; /* Make it take the full width */
+  background-color: #121212; /* Match the background color */
+  padding: 20px;
+  text-align: center;
+  z-index: 10; /* Ensures it's always on top */
+}
+
+.profile-details h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.member-since {
+  font-size: 1.2rem;
+  color: #888; /* A lighter color for "Member since" */
+}
+
+/* Buttons Styles */
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between buttons */
+  margin-top: 20px; /* Adds space between buttons and "Member since" */
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: text-decoration 0.3s ease;
+  outline: none; /* Removes any outline around the button when focused */
+}
+
+.profile-button:hover {
+  text-decoration: underline;
+}
+
+.profile-button:active,
+.profile-button:focus {
+  background: none; /* Remove background on click/focus */
+  outline: none; /* Remove outline on focus */
+}
+
+/* Movie List Styles */
+.movie-list-section {
+  margin-top: 160px; /* Add margin to push movie list below the fixed profile details */
+  padding-bottom: 150px; /* Add padding at the bottom to prevent the last item from being hidden by the home bar */
+}
+
+.movie-list {
+  display: flex;
+  flex-direction: column; /* Stack movie items vertically */
+  gap: 20px;
+  justify-content: flex-start; /* Align movie items to the start */
+  align-items: center; /* Center the items horizontally */
+}
+
+.movie-item {
+  display: flex;
+  flex-direction: row; /* Row layout for poster and details */
+  align-items: center; /* Aligns poster to the left */
+  gap: 20px; /* Space between poster and movie details */
+  width: 350px; /* Fixed width for each movie item */
+  margin-bottom: 20px; /* Add space between movie items */
+  background-color: #1e1e1e; /* Slightly darker background for each movie item */
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+.movie-poster {
+  width: 120px; /* Fixed size for the poster */
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px; /* Rounded corners for the poster */
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Aligns text vertically */
+  gap: 5px;
+}
+
+.movie-info h4 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.movie-info p {
+  font-size: 14px;
+  margin: 0;
+  color: #ddd; /* Light color for the text */
+}
+
+.movie-info .rating {
+  font-size: 14px;
+  color: #ff9900; /* IMDb rating color */
+  font-weight: bold;
+}
+
+.movie-info .release-date {
+  font-size: 14px;
+  color: #bbb; /* Lighter color for the release date */
+}
