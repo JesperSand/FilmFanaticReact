@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getAuth, signOut } from 'firebase/auth'; // Import signOut
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirecting
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import HomeBar from './HomeBar'; // Import HomeBar component
 import './styles/ProfilePage.css';
 
@@ -98,18 +99,20 @@ const ProfilePage = () => {
           ) : (
             <div className="movie-list">
               {movieList.map((movie, index) => (
-                <div key={index} className="movie-item">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                    alt={movie.title}
-                    className="movie-poster"
-                  />
-                  <div className="movie-info">
-                    <h4>{movie.title}</h4>
-                    <p>{movie.release_date}</p>
-                    <p>{movie.imdb_rating ? `${movie.imdb_rating.toFixed(1)}/10` : 'N/A'}</p>
+                <Link to={`/movie/${movie.id}`} key={index} className="movie-card-link"> {/* Link for the whole card */}
+                  <div className="movie-item">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                      alt={movie.title}
+                      className="movie-poster"
+                    />
+                    <div className="movie-info">
+                      <h4>{movie.title}</h4>
+                      <p>{movie.release_date}</p>
+                      <p>{movie.imdb_rating ? `${movie.imdb_rating.toFixed(1)}/10` : 'N/A'}</p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}

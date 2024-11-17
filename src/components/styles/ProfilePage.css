@@ -54,6 +54,10 @@
   transition: text-decoration 0.3s ease;
   outline: none; /* Removes any outline around the button when focused */
 }
+/* Adjust the title spacing */
+h3 {
+  margin-bottom: 20px; /* Adjust the space as needed */
+}
 
 .profile-button:hover {
   text-decoration: underline;
@@ -76,20 +80,24 @@
   flex-direction: column; /* Stack movie items vertically */
   gap: 20px;
   justify-content: flex-start; /* Align movie items to the start */
-  align-items: center; /* Center the items horizontally */
 }
 
 .movie-item {
   display: flex;
   flex-direction: row; /* Row layout for poster and details */
-  align-items: center; /* Aligns poster to the left */
-  gap: 20px; /* Space between poster and movie details */
+  text-align: left;
+  gap: 10px; /* Space between poster and movie details */
   width: 350px; /* Fixed width for each movie item */
-  margin-bottom: 20px; /* Add space between movie items */
+  margin-bottom: 5px; /* Add space between movie items */
   background-color: #1e1e1e; /* Slightly darker background for each movie item */
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  transition: transform 0.2s ease-in-out;
+}
+
+.movie-item:hover {
+  transform: scale(1.05); /* Optional: make the card scale when hovered */
 }
 
 .movie-poster {
@@ -103,7 +111,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Aligns text vertically */
-  gap: 5px;
 }
 
 .movie-info h4 {
@@ -127,4 +134,14 @@
 .movie-info .release-date {
   font-size: 14px;
   color: #bbb; /* Lighter color for the release date */
+}
+
+/* Link styles for movie cards */
+.movie-card-link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from the card */
+}
+
+.movie-item {
+  cursor: pointer; /* Makes it clear that the item is clickable */
 }
