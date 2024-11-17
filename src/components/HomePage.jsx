@@ -254,8 +254,54 @@ const HomePage = () => {
             </Link>
           </div>
         ))}
+        
       </div>
-
+              {/* Popular Movies Section */}
+      <h2 className="trending-heading">Popular Movies</h2>
+      <div className="trending-container">
+        {popularMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
+          </div>
+        ))}
+      </div>
+      {/* Top Rated Movies Section */}
+      <h2 className="trending-heading">Top Rated Movies</h2>
+      <div className="trending-container">
+        {topRatedMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
+          </div>
+        ))}
+      </div>
+      {/* Upcoming Movies Section */}
+      <h2 className="trending-heading">Upcoming Movies</h2>
+      <div className="trending-container">
+        {upcomingMovies.map((movie) => (
+          <div key={movie.id} className="trending-card">
+            <Link to={`/movie/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className="trending-image"
+              />
+            </Link>
+          </div>
+        ))}
+      </div>
+      {/* Add HomeBar at the bottom */}
       <HomeBar />
     </div>
   );
