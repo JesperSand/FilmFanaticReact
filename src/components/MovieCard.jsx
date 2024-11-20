@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import './styles/MovieCard.css'; // Import the CSS file
 
-const MovieCard = ({ movie, onRemove, onSwipe, swiped }) => {
+const MovieCard = ({ movie, onRemove, onMarkAsSeen, onSwipe, swiped }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isSeen, setIsSeen] = useState(movie.seen || false); // Track if the movie is seen
   const cardRef = useRef(null); // Reference to the card element
 
-  // Detect mobile screen size on component mount
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768); // Adjust this value based on your definition of "mobile"
@@ -19,7 +19,7 @@ const MovieCard = ({ movie, onRemove, onSwipe, swiped }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Always call the hook, but conditionally apply its handlers for non-mobile screens
+  // Swipeable handlers
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       onSwipe(movie.id); // Trigger swipe state when swiped
@@ -31,37 +31,26 @@ const MovieCard = ({ movie, onRemove, onSwipe, swiped }) => {
     trackMouse: true,
   });
 
-  // If not mobile, we don't want the swipeable interaction, so we stop further processing
+  // If not mobile, we don't want the swipeable interaction
   const swipeHandlers = isMobile ? handlers : {};
 
   const handleRemove = (event) => {
-    // Prevent reset swipe when clicking the "Remove" button
     event.stopPropagation(); // Prevent click outside logic from firing
     onRemove(movie.id);
   };
 
-  // Apply the transform on the body when the card is swiped
-  useEffect(() => {
-    if (swiped) {
-      // Apply a transform to the body when the card is swiped
-      document.body.style.transform = 'translateX(0%)'; // Smooth transition effect
-      document.body.style.transition = 'transform 0.3s ease'; // Apply transition for smooth effect
-    } else {
-      // Reset the transform when the card is not swiped
-      document.body.style.transform = 'none';
-    }
-
-    // Cleanup the transform when component unmounts or state changes
-    return () => {
-      document.body.style.transform = 'none'; // Reset transform on cleanup
-    };
-  }, [swiped]); // Trigger the effect when swiped state changes
+  const handleMarkAsSeen = (event) => {
+    event.stopPropagation(); // Prevent click outside logic from firing
+    const newSeenState = !isSeen;
+    setIsSeen(newSeenState); // Toggle the seen state locally
+    onMarkAsSeen(movie.id, newSeenState); // Pass the new state to the parent component (ProfilePage)
+  };
 
   return (
     <div
       ref={cardRef} // Attach the ref to the card div
       {...swipeHandlers}
-      className={`swipeable-card ${swiped ? 'swiped' : ''}`} // Add 'swiped' class based on swipe state
+      className={`swipeable-card ${swiped ? 'swiped' : ''} ${isSeen ? 'seen' : ''}`} // Add 'seen' class for movies that are marked as seen
     >
       <Link to={`/movie/${movie.id}`} className="movie-card-link">
         <div className="movie-item">
@@ -85,10 +74,15 @@ const MovieCard = ({ movie, onRemove, onSwipe, swiped }) => {
         </div>
       </Link>
 
-      {/* Show the "Remove" button only if the card is swiped */}
+      {/* Show the swipe buttons only if the card is swiped */}
       {swiped && (
-        <div className="remove-button show">
-          <button onClick={handleRemove} className="remove-button-text">Remove</button>
+        <div className="swipe-buttons show">
+          <button onClick={handleRemove} className="swipe-button remove-button">
+            Remove
+          </button>
+          <button onClick={handleMarkAsSeen} className="swipe-button mark-seen-button">
+            {isSeen ? 'Unmark as Seen' : 'Mark as Seen'} {/* Toggle button text */}
+          </button>
         </div>
       )}
     </div>

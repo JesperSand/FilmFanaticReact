@@ -90,10 +90,8 @@ const ProfilePage = () => {
       }
     };
 
-    // Listen for clicks on the document
     document.addEventListener('pointerdown', handleClickOutside);
 
-    // Cleanup listener
     return () => {
       document.removeEventListener('pointerdown', handleClickOutside);
     };
@@ -105,6 +103,30 @@ const ProfilePage = () => {
       ...prevStates,
       [movieId]: true,
     }));
+  };
+
+  const handleMarkAsSeen = async (movieId, newSeenState) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+  
+    if (user) {
+      try {
+        const db = getFirestore();
+        const userRef = doc(db, 'users', user.uid);
+  
+        // Update movie's "seen" status in Firestore
+        const updatedList = movieList.map((movie) =>
+          movie.id === movieId ? { ...movie, seen: newSeenState } : movie
+        );
+  
+        await updateDoc(userRef, { movieList: updatedList });
+  
+        // Update the state with the new seen status
+        setMovieList(updatedList);
+      } catch (err) {
+        setError('Failed to mark the movie as seen. Please try again.');
+      }
+    }
   };
 
   return (
@@ -136,8 +158,9 @@ const ProfilePage = () => {
                   key={movie.id}
                   movie={movie}
                   onRemove={handleRemoveMovie}
-                  onSwipe={handleSwipe} // Pass swipe handler to each card
-                  swiped={swipedStates[movie.id]} // Pass swipe state for each movie card
+                  onSwipe={handleSwipe}
+                  onMarkAsSeen={handleMarkAsSeen} // Pass the function here
+                  swiped={swipedStates[movie.id]}
                 />
               ))}
             </div>

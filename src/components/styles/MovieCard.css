@@ -1,81 +1,93 @@
+/* General resets for horizontal overflow */
+body, html {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Constrain to viewport width */
+}
+
 /* Container for the swipeable card */
 .swipeable-card {
     position: relative;
     transition: transform 0.3s ease; /* Add smooth transition for the card */
     will-change: transform; /* Hint to the browser that this element will be transformed */
+    max-width: 100%; /* Prevent overflow */
 }
 
-/* Button that will appear on swipe */
-.remove-button {
+/* Container for swipe buttons */
+.swipe-buttons {
     position: absolute;
-    top: 0; /* Align button with the top of the card */
-    right: -160px; /* Position the button 10px off-screen (gap between card and button) */
-    width: 150px; /* Increase the width of the button for a wider look */
-    height: 100%; /* Make the button the same height as the card */
-    background-color: rgb(239, 53, 53); /* Set a solid color for the button */
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px; /* Rounded corners for the button */
-    z-index: 10;
+    top: 0;
+    left: 100%; /* Start positioned to the right of the card */
+    width: 150px; /* Combined width of both buttons */
+    height: 100%; /* Match the height of the card */
+    display: flex; /* Flex container for side-by-side buttons */
     opacity: 0; /* Hidden by default */
-    pointer-events: none; /* Disable button interactions when hidden */
-    transition: opacity 0.3s ease, right 0.3s ease; /* Smooth transition for opacity and right position */
-    display: flex; /* Flexbox for centering the text */
-    align-items: center; /* Vertically center the text */
-    justify-content: center; /* Horizontally center the text */
-    font-size: 16px; /* Optional: adjust font size for better readability */
+    pointer-events: none; /* Disable interactions when hidden */
+    transition: opacity 0.3s ease, left 0.3s ease; /* Smooth transition */
+    z-index: 10;
 }
 
-/* Styling the button with the class .remove-button-text */
-.remove-button-text {
-    background-color: transparent; /* Remove any background if it's unwanted */
-    color: white; /* Ensure text color is white */
-    font-size: 16px;
-    border: none; /* Remove border */
-    width: 100%; /* Ensure button takes full width */
-    height: 100%; /* Ensure button takes full height of the card */
+/* Individual button styles */
+.swipe-button {
+    flex: 1; /* Each button takes half the container */
+    height: 90%; /* Slightly smaller than full height for padding */
+    margin: 5% 5px; /* Add spacing between buttons and card edges */
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 10px; /* Rounded corners for the button */
+    font-size: 12px; /* Reduced font size */
+    padding: 0 5px; /* Add padding for text */
+    border: none;
     cursor: pointer;
+    border-radius: 8px; /* Slightly smaller rounded corners */
+    color: white;
+    overflow: hidden; /* Ensure text stays within bounds */
+    text-align: center;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
-/* When the card is swiped, make the remove button appear */
-.remove-button.show {
-    opacity: 1; /* Make the button visible */
-    pointer-events: auto; /* Enable interactions with the button */
+/* Remove button */
+.remove-button {
+    background-color: rgb(239, 53, 53); /* Red for remove */
 }
 
-/* For mobile screens, adjust button's position */
+/* Mark as Seen button */
+.mark-seen-button {
+    background-color: rgb(53, 239, 53); /* Green for mark as seen */
+}
+
+/* Show the buttons when card is swiped */
+.swipe-buttons.show {
+    opacity: 1; /* Make visible */
+    pointer-events: auto; /* Enable interactions */
+    left: calc(100% + 10px); /* Position fully to the right of the card */
+}
+
+/* For mobile screens */
 @media (max-width: 768px) {
-    .swipeable-card {
-        touch-action: pan-y; /* Allow horizontal swipe gestures */
+    .swipe-buttons {
+        left: calc(100% + 10px); /* Ensure buttons stay to the right on smaller screens */
     }
 
-    .remove-button {
-        right: -160px; /* Keep the button off-screen with a 10px gap on mobile */
+    .swipeable-card {
+        touch-action: pan-y; /* Allow horizontal swipe gestures */
     }
 }
 
 /* Swipe effect for moving the card */
 .swipeable-card.swiped {
     transform: translateX(-50%); /* Move the card horizontally when swiped */
-    /* Adjust swipe amount based on screen size */
     transition: transform 0.3s ease;
 }
 
-/* For large screens, swipe should be more subtle */
-@media (min-width: 768px) {
-    .swipeable-card.swiped {
-        transform: translateX(-200px); /* More significant movement on larger screens */
-    }
-}
-
-/* Prevent swipe on non-mobile screens */
-@media (min-width: 768px) {
-    .swipeable-card {
-        touch-action: none; /* Disable swipe gesture */
-    }
+/* Home bar styling */
+.home-bar {
+    position: fixed; /* Fix the position relative to the viewport */
+    bottom: 0; /* Stick to the bottom */
+    left: 0;
+    width: 100%; /* Stretch across the entire width */
+    z-index: 999; /* Ensure it stays above other elements */
+    background-color: #fff; /* Adjust background color to match the theme */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for separation */
 }
