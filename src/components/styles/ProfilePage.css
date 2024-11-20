@@ -145,3 +145,9 @@ h3 {
 .movie-item {
   cursor: pointer; /* Makes it clear that the item is clickable */
 }
+.movie-info .description {
+  font-size: 14px;
+  color: #aaa; /* Slightly lighter color for the description */
+  margin-top: 10px; /* Add some spacing from other text */
+}
+
